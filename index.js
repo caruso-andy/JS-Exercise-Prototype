@@ -43,6 +43,9 @@ function Person(name, age) {
   this.name = name;
   this.age = age;
   this.stomach = [];
+  this.speak = function(){
+    return `Hello, my name is ${this.name}`;
+  }
 }
 Person.prototype.eat = function(someFood){
   if(this.stomach.length < 10){
@@ -109,18 +112,26 @@ console.log(carOne.noFuel);
     - Besides the methods on Person.prototype, babies have the ability to `.play()`:
         + Should return a string "Playing with x", x being the favorite toy.
 */
-function Baby(name, age, favoriteToy) {
-  this.name = name;
-  this.age = age;
-  this.favoriteToy = favoriteToy;
+function Baby(childAttributes) {
+  Person.call(this, childAttributes);
+  this.isChild = childAttributes.isChild;
 }
-const baby = new Person('Sue', 1, 'ball');
-console.log(`${baby.name}, ${baby.age}, ${baby.height}`);
+Baby.prototype = Object.create(Person.prototype);
+const baby = new Baby({
+  name: 'Sue',
+  age: '1',
+  favoriteToy: 'Ball'
+});
+console.log(baby);
 
 Baby.prototype.play = function(){
   return `Playing with ${this.favoriteToy}`;
 }
 console.log(baby.play);
+console.log(baby.speak());
+// console.log(baby.age);
+//Can't figure out how to call to third argument in Baby(favoriteToy), using 'baby' which is inheriting Person's properties.  Need to log
+//return statement "Playing with x", x being the favorite toy.
 /* 
   TASK 4
 
