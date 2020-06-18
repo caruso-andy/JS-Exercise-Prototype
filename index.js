@@ -58,13 +58,13 @@ Person.prototype.poop = function(){
 Person.prototype.toString = function(){
   return `${this.name}, ${this.age}`;
 }
-const personOne = new Person('Mary', 30);
-console.log(personOne.toString());
-personOne.eat('tacos');
-personOne.eat('sushi');
-personOne.eat('nachos');
-console.log(personOne.stomach);
-console.log(personOne.poop);
+// const personOne = new Person('Mary', 30);
+// console.log(personOne.toString());
+// personOne.eat('tacos');
+// personOne.eat('sushi');
+// personOne.eat('nachos');
+// // console.log(personOne.stomach);
+// // console.log(personOne.poop);
 /*
   TASK 2
     - Write a Car constructor that initializes `model` and `milesPerGallon` from arguments.
@@ -88,9 +88,10 @@ function Car(model, milesPerGallon) {
 Car.prototype.fill = function(gallons){
   return this.tank+= gallons;  
 }
+console.log(fill(20));
 Car.prototype.noFuel = function(){
   if(this.odometer >= 500){
-    return `I ran out of fuel a ${this.odometer} miles!`;    
+    return `I ran out of fuel at ${this.odometer} miles!`;    
   }
   else{
     return `Ain't outta gas yet!`
@@ -112,26 +113,16 @@ console.log(carOne.noFuel);
     - Besides the methods on Person.prototype, babies have the ability to `.play()`:
         + Should return a string "Playing with x", x being the favorite toy.
 */
-function Baby(childAttributes) {
-  Person.call(this, childAttributes);
-  this.isChild = childAttributes.isChild;
+function Baby(name, age, favoriteToy) {
+  Person.call(this, name, age);
+  this.favoriteToy = favoriteToy;  
 }
 Baby.prototype = Object.create(Person.prototype);
-const baby = new Baby({
-  name: 'Sue',
-  age: '1',
-  favoriteToy: 'Ball'
-});
-console.log(baby);
-
+const baby = new Baby('Sue', 1, 'Ball');
 Baby.prototype.play = function(){
   return `Playing with ${this.favoriteToy}`;
 }
-console.log(baby.play);
-console.log(baby.speak());
-// console.log(baby.age);
-//Can't figure out how to call to third argument in Baby(favoriteToy), using 'baby' which is inheriting Person's properties.  Need to log
-//return statement "Playing with x", x being the favorite toy.
+console.log(baby.play());
 /* 
   TASK 4
 
